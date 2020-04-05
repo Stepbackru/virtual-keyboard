@@ -15,5 +15,9 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
+        'linebreak-style': ['error', 'windows'],
+        'no-use-before-define': ['error', { functions: false, variables: false }],
+        'no-plusplus': ["error", { "allowForLoopAfterthoughts": true }],
+        'import/extensions': ['error', 'always', {ignorePackages: true} ]
     }
 };
