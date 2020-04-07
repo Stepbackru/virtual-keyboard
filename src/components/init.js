@@ -1,3 +1,5 @@
+import buttons from '../data/buttons.js';
+
 const init = () => {
   initKeyBoard();
 };
@@ -11,21 +13,30 @@ const initKeyBoard = () => {
   keyboard.classList.add('keyboard');
   document.querySelector('.wrapper').append(keyboard);
 
-  const ruKeyboardKeys = ['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '+', 'Backspace',
-    'Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\', 'Delete',
-    'CapsLock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'Enter',
-    'Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', 'Up', 'Shift',
-    'Ctrl', 'Win', 'Alt', ' ', 'Alt', 'Ctrl', 'Left', 'Down', 'Right'];
-  const anyKeys = ['Backspace', 'Tab', 'Delete', 'CapsLock', 'Enter', 'Shift'];
+  textareaCreator();
+  linesCreator();
+};
 
-  for (let i = 0; i < ruKeyboardKeys.length; i++) {
-    const keyboardKey = document.createElement('div');
-    keyboardKey.classList.add('keyboard__key');
-    document.querySelector('.keyboard').append(keyboardKey);
-    keyboardKey.innerText = ruKeyboardKeys[i];
-    for (let j = 0; j < anyKeys.length; j++) {
-      if (keyboardKey.innerText === anyKeys[j]) {
-        keyboardKey.classList.add('keyboard__key-any');
+const textareaCreator = () => {
+  const textarea = document.createElement('textarea');
+  textarea.classList.add('keyboard__textarea');
+  textarea.innerText = 'Привет! Видишь клавиаутуру? и я не вижу, а она есть! :D В общем, друг, были у меня тут проблемки, короновирус все дела в общем если что ты увидел здесь классный функционал и классно оценил, а пока ты смотришь я пишу как раз этот функционал :D';
+  document.querySelector('.keyboard').append(textarea);
+};
+
+const linesCreator = () => {
+  for (let i = 1; i <= 5; i++) {
+    const keyboardLines = document.createElement('div');
+    keyboardLines.classList.add('keyboard__line');
+    keyboardLines.setAttribute('data-line', `${i}`);
+    document.querySelector('.keyboard').append(keyboardLines);
+
+    for (let j = 0; j < buttons.length; j++) {
+      if (i === buttons[j].row) {
+        const lineItem = document.createElement('div');
+        lineItem.classList.add(`keyboard__key-${buttons[j].width}`);
+        lineItem.innerHTML = `<span class="key__content">${buttons[j].content.ru}</span>`;
+        keyboardLines.append(lineItem);
       }
     }
   }

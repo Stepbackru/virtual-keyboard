@@ -11,19 +11,48 @@ body {
 }
 .keyboard {
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    background: #000;
     min-height: 50px;
-    justify-content: flex-start;
 }
-.keyboard__key {
+.keyboard__textarea {
+    width: calc(100% - 10px);
+    height: 400px;
+    resize: none;
+    margin: 0 2px 20px;
+    font-size: 40px;
+}
+.keyboard__line {
+    display: flex;
+    justify-content: space-between;
+}
+.keyboard__key-normal,
+.keyboard__key-medium,
+.keyboard__key-wide,
+.keyboard__key-wideplus,
+.keyboard__key-overwide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 50px;
     height: 50px;
-    background: red;
-    margin: 2px 2px;
+    background: rgb(69,73,71);
+    background: linear-gradient(180deg, rgba(69,73,71,1) 0%, rgba(1,1,1,1) 100%);
+    margin: 3px 2px;
     box-sizing: border-box;
+    border-radius: 5px;
 }
-.keyboard__key-any {
-    width: 75px
+.keyboard__key-medium {
+    width: 70px;
+}
+.keyboard__key-wide {
+    width: 135px;
+}
+.keyboard__key-wideplus {
+    width: 160px;
+}
+.keyboard__key-overwide{
+    width: 330px
+}
+.key__content {
+    color: #fff;
+    text-align: center;
 }
