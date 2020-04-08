@@ -15,20 +15,16 @@ body {
 }
 .keyboard__textarea {
     width: calc(100% - 10px);
-    height: 400px;
+    height: 300px;
     resize: none;
     margin: 0 2px 20px;
-    font-size: 40px;
+    font-size: 16px;
 }
 .keyboard__line {
     display: flex;
     justify-content: space-between;
 }
-.keyboard__key-normal,
-.keyboard__key-medium,
-.keyboard__key-wide,
-.keyboard__key-wideplus,
-.keyboard__key-overwide {
+.keyboard__key {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,6 +35,11 @@ body {
     margin: 3px 2px;
     box-sizing: border-box;
     border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    -webkit-box-shadow: 3px 3px 7px 3px rgba(0,0,0,0.7);
+       -moz-box-shadow: 3px 3px 7px 3px rgba(0,0,0,0.7);
+            box-shadow: 3px 3px 7px 3px rgba(0,0,0,0.7);
 }
 .keyboard__key-medium {
     width: 70px;
@@ -55,4 +56,21 @@ body {
 .key__content {
     color: #fff;
     text-align: center;
+}
+.keyboard__key:active {
+    transform: scale(.95);
+    background: rgb(60,134,227);
+    background: linear-gradient(180deg, rgba(60,134,227,1) 0%, rgba(18,85,170,1) 100%);
+    -webkit-box-shadow: 3px 3px 4px 1px rgba(0,0,0,0.7);
+       -moz-box-shadow: 3px 3px 4px 1px rgba(0,0,0,0.7);
+            box-shadow: 3px 3px 4px 1px rgba(0,0,0,0.7);
+    transition: all .3s;
+}
+
+@media (hover:hover) {
+    .keyboard__key:hover {
+        background: rgb(60,134,227);
+        background: linear-gradient(180deg, rgba(60,134,227,1) 0%, rgba(18,85,170,1) 100%);
+        transition: all .3s;
+    }
 }

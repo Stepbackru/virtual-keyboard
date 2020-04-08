@@ -20,8 +20,8 @@ const initKeyBoard = () => {
 const textareaCreator = () => {
   const textarea = document.createElement('textarea');
   textarea.classList.add('keyboard__textarea');
-  textarea.innerText = 'Привет! Видишь клавиаутуру? и я не вижу, а она есть! :D В общем, друг, были у меня тут проблемки, короновирус все дела в общем если что ты увидел здесь классный функционал и классно оценил, а пока ты смотришь я пишу как раз этот функционал :D';
   document.querySelector('.keyboard').append(textarea);
+  textarea.focus();
 };
 
 const linesCreator = () => {
@@ -33,13 +33,22 @@ const linesCreator = () => {
 
     for (let j = 0; j < buttons.length; j++) {
       if (i === buttons[j].row) {
-        const lineItem = document.createElement('div');
+        const lineItem = document.createElement('button');
+        lineItem.classList.add('keyboard__key');
         lineItem.classList.add(`keyboard__key-${buttons[j].width}`);
         lineItem.innerHTML = `<span class="key__content">${buttons[j].content.ru}</span>`;
         keyboardLines.append(lineItem);
+        buttons[j].lineItem = lineItem;
       }
     }
   }
+  document.addEventListener('keydown', (e) => {
+    for (let i = 0; i < buttons.length; i++) {
+      if (e.code === buttons[i].code) {
+        buttons[i].lineItem.click();
+      }
+    }
+  });
 };
 
 export default init;
