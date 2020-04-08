@@ -9,8 +9,8 @@ const activeButtons = () => {
 const activeClickButton = () => {
   document.querySelector('.keyboard').addEventListener('click', (e) => {
     for (let i = 0; i < buttons.length; i++) {
-      if (e.code === buttons[i].code && e.target.classList.contains('keyboard__key')) {
-        e.click();
+      if (e.target.classList.contains('keyboard__key')) {
+        document.querySelector('.keyboard__textarea').focus();
       }
     }
   });
