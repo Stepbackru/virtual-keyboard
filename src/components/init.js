@@ -42,13 +42,6 @@ const linesCreator = () => {
       }
     }
   }
-  document.addEventListener('keydown', (e) => {
-    for (let i = 0; i < buttons.length; i++) {
-      if (e.code === buttons[i].code) {
-        buttons[i].lineItem.click();
-      }
-    }
-  });
 };
 
 export default init;
