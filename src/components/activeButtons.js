@@ -53,6 +53,9 @@ const activeClickButton = () => {
         case CONST.ARROWRIGHT:
           setPositionCursor(textarea, textarea.selectionStart + 1);
           break;
+        case CONST.ARROWUP:
+          setPositionCursor(textarea, 0);
+          break;
         case CONST.CAPSLOCK:
           capsPress = !capsPress;
           capslockHandler(keysContent, capsPress);

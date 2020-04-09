@@ -13,3 +13,4 @@ export const BACKSPACE = 'Backspace';
 export const ARROWLEFT = '◄';
 export const ARROWDOWN = '▼';
 export const ARROWRIGHT = '►';
+export const ARROWUP = '▲';
