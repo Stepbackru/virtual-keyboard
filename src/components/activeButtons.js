@@ -64,10 +64,18 @@ const addActiveClassOnPressKey = () => {
 };
 
 const removeActiveClass = () => {
+  const keysContent = [...document.querySelectorAll('.key__content')];
+  const lang = sessionStorage.getItem('lang');
+
   document.addEventListener('keyup', (e) => {
     const button = buttons.find((item) => item.code === e.code);
     if (e.code === CONST.SHIFT_LEFT_CODE || e.code === CONST.SHIFT_RIGHT_CODE) {
       button.lineItem.click();
+      for (let i = 0; i < buttons.length; i++) {
+        if (buttons[i].type !== 'functional') {
+          keysContent[i].innerText = buttons[i].content[lang];
+        }
+      }
     }
     if (button) {
       button.lineItem.classList.remove('keyboard__key-active');

@@ -25,6 +25,10 @@ const textareaCreator = () => {
 };
 
 const linesCreator = () => {
+  if (sessionStorage.getItem('lang') === null) {
+    sessionStorage.setItem('lang', 'ru');
+  }
+  const lang = sessionStorage.getItem('lang');
   for (let i = 1; i <= 5; i++) {
     const keyboardLines = document.createElement('div');
     keyboardLines.classList.add('keyboard__line');
@@ -36,13 +40,7 @@ const linesCreator = () => {
         const lineItem = document.createElement('button');
         lineItem.classList.add('keyboard__key');
         lineItem.classList.add(`keyboard__key-${buttons[j].width}`);
-        if (sessionStorage.getItem('lang') === 'ru') {
-          lineItem.innerHTML = `<span class="key__content">${buttons[j].content.ru}</span>`;
-        } else if (sessionStorage.getItem('lang') === 'en') {
-          lineItem.innerHTML = `<span class="key__content">${buttons[j].content.en}</span>`;
-        } else {
-          lineItem.innerHTML = `<span class="key__content">${buttons[j].content.ru}</span>`;
-        }
+        lineItem.innerHTML = `<span class="key__content">${buttons[j].content[lang]}</span>`;
         keyboardLines.append(lineItem);
         buttons[j].lineItem = lineItem;
       }

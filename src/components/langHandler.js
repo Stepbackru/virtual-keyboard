@@ -8,15 +8,9 @@ const langChangeOnPressKeys = (func, ...codes) => {
   const pressed = new Set();
   document.addEventListener('keydown', (e) => {
     pressed.add(e.code);
-
-    for (let i = 0; i < codes.length; i++) {
-      if (!pressed.has(codes[i])) {
-        return;
-      }
+    if (pressed.has(codes[0]) && pressed.has(codes[1])) {
+      func();
     }
-    pressed.clear();
-
-    func();
   });
 
   document.addEventListener('keyup', (e) => {
@@ -33,7 +27,7 @@ const setLangToSessionStorage = () => {
       }
     }
     sessionStorage.setItem('lang', 'en');
-  } else if (sessionStorage.getItem('lang') === 'en') {
+  } else {
     for (let i = 0; i < keysContent.length; i++) {
       if (buttons[i].type !== 'functional') {
         keysContent[i].innerText = `${buttons[i].content.ru}`;
