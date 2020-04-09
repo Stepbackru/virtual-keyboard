@@ -10,14 +10,16 @@ const shiftButtonHandler = () => {
 const activeShiftButton = (keysContent) => {
   const items = keysContent;
   document.querySelector('.keyboard').addEventListener('keydown', (e) => {
-    if (e.code === CONST.SHIFT_LEFT_CODE || CONST.SHIFT_RIGHT_CODE) {
-      if (sessionStorage.getItem('lang') === 'ru') {
-        for (let i = 0; i < keysContent.length; i++) {
-          items[i].innerText = `${buttons[i].altContent.ru}`;
+    if ((e.code === CONST.SHIFT_LEFT_CODE || CONST.SHIFT_RIGHT_CODE) && (sessionStorage.getItem('lang') === 'ru')) {
+      for (let i = 0; i < keysContent.length; i++) {
+        if (buttons[i].type !== 'functional') {
+          items[i].innerText = `${buttons[i].altContent.ru.toUpperCase()}`;
         }
-      } else if (sessionStorage.getItem('lang') === 'en') {
-        for (let i = 0; i < keysContent.length; i++) {
-          items[i].innerText = `${buttons[i].altContent.en}`;
+      }
+    } else if ((e.code === CONST.SHIFT_LEFT_CODE || CONST.SHIFT_RIGHT_CODE) && (sessionStorage.getItem('lang') === 'en')) {
+      for (let i = 0; i < keysContent.length; i++) {
+        if (buttons[i].type !== 'functional') {
+          items[i].innerText = `${buttons[i].altContent.en.toUpperCase()}`;
         }
       }
     }
@@ -27,15 +29,13 @@ const activeShiftButton = (keysContent) => {
 const disableShiftButton = (keysContent) => {
   const items = keysContent;
   document.querySelector('.keyboard').addEventListener('keyup', (e) => {
-    if (e.code === CONST.SHIFT_LEFT_CODE || CONST.SHIFT_RIGHT_CODE) {
-      if (sessionStorage.getItem('lang') === 'ru') {
-        for (let i = 0; i < keysContent.length; i++) {
-          items[i].innerText = `${buttons[i].content.ru}`;
-        }
-      } else if (sessionStorage.getItem('lang') === 'en') {
-        for (let i = 0; i < keysContent.length; i++) {
-          items[i].innerText = `${buttons[i].content.en}`;
-        }
+    if ((e.code === CONST.SHIFT_LEFT_CODE || CONST.SHIFT_RIGHT_CODE) && (sessionStorage.getItem('lang') === 'ru')) {
+      for (let i = 0; i < keysContent.length; i++) {
+        items[i].innerText = `${buttons[i].content.ru}`;
+      }
+    } else if ((e.code === CONST.SHIFT_LEFT_CODE || CONST.SHIFT_RIGHT_CODE) && (sessionStorage.getItem('lang') === 'en')) {
+      for (let i = 0; i < keysContent.length; i++) {
+        items[i].innerText = `${buttons[i].content.en}`;
       }
     }
   });
