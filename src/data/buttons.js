@@ -481,14 +481,6 @@ const buttons = [
   },
   {
     type: 'functional',
-    content: { ru: 'Alt', en: 'Alt' },
-    altContent: { ru: 'Alt', en: 'Alt' },
-    code: 'AltRight',
-    width: 'normal',
-    row: 5,
-  },
-  {
-    type: 'functional',
     content: { ru: 'Ctrl', en: 'Ctrl' },
     altContent: { ru: 'Ctrl', en: 'Ctrl' },
     code: 'ControlRight',
