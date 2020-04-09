@@ -53,6 +53,8 @@ const infoCreator = () => {
   const lang = sessionStorage.getItem('lang');
   const infoLang = document.createElement('p');
   const infoOS = document.createElement('p');
+  infoLang.classList.add('info');
+  infoOS.classList.add('info');
   infoLang.innerText = `${(lang === 'ru') ? 'Смена языка ввода Ctrl + Shift' : 'Change input language Ctrl + Shift'}`;
   infoOS.innerText = `${(lang === 'ru') ? 'Сделано в ОС Windows' : 'Developed in Windows OS'}`;
   document.querySelector('.keyboard').append(infoLang);

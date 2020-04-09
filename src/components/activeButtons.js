@@ -94,7 +94,7 @@ const addActiveClassOnPressKey = () => {
 
 const removeActiveClass = () => {
   const keysContent = [...document.querySelectorAll('.key__content')];
-  const lang = sessionStorage.getItem('lang');
+  let langText = '';
 
   document.addEventListener('keyup', (e) => {
     const button = buttons.find((item) => item.code === e.code);
@@ -102,7 +102,12 @@ const removeActiveClass = () => {
       button.lineItem.click();
       for (let i = 0; i < buttons.length; i++) {
         if (buttons[i].type !== 'functional') {
-          keysContent[i].innerText = buttons[i].content[lang];
+          if (sessionStorage.getItem('lang') === 'ru') {
+            langText = buttons[i].content.ru;
+          } else {
+            langText = buttons[i].content.en;
+          }
+          keysContent[i].innerText = langText;
         }
       }
     }
