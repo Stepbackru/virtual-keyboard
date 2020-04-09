@@ -18,7 +18,40 @@ const activeClickButton = () => {
     if (e.target.classList.contains('keyboard__key')) {
       switch (e.target.innerText) {
         case CONST.TAB:
-          textarea.value += '\t';
+          textarea.value = `${textarea.value.substring(0, textarea.selectionStart)}\t${textarea.value.substring(textarea.selectionEnd)}`;
+          setPositionCursor(textarea, textarea.selectionStart + 1);
+          break;
+        case CONST.ENTER:
+          textarea.value = `${textarea.value.substring(0, textarea.selectionStart)}\n${textarea.value.substring(textarea.selectionEnd)}`;
+          setPositionCursor(textarea, textarea.selectionStart + 1);
+          break;
+        case CONST.BACKSPACE:
+          if (textarea.selectionStart !== textarea.selectionEnd) {
+            textarea.value = `${textarea.value.slice(0, textarea.selectionStart)}${textarea.value.slice(textarea.selectionEnd)}`;
+            setPositionCursor(textarea, textarea.selectionStart);
+          } else if (textarea.selectionStart !== 0) {
+            textarea.value = `${textarea.value.slice(0, textarea.selectionStart - 1)}${textarea.value.slice(textarea.selectionEnd)}`;
+            setPositionCursor(textarea, textarea.selectionEnd);
+          } else {
+            setPositionCursor(textarea, textarea.selectionEnd);
+          }
+          break;
+        case CONST.DEL:
+          if (textarea.selectionStart !== textarea.selectionEnd) {
+            textarea.value = `${textarea.value.slice(0, textarea.selectionStart)}${textarea.value.slice(textarea.selectionEnd)}`;
+          } else if (textarea.selectionEnd !== textarea.value.length) {
+            textarea.value = `${textarea.value.slice(0, textarea.selectionStart)}${textarea.value.slice(textarea.selectionStart + 1)}`;
+          }
+          setPositionCursor(textarea, textarea.selectionStart);
+          break;
+        case CONST.ARROWLEFT:
+          setPositionCursor(textarea, textarea.selectionStart - 1);
+          break;
+        case CONST.ARROWDOWN:
+          setPositionCursor(textarea, textarea.value.length);
+          break;
+        case CONST.ARROWRIGHT:
+          setPositionCursor(textarea, textarea.selectionStart + 1);
           break;
         case CONST.CAPSLOCK:
           capsPress = !capsPress;
@@ -27,15 +60,11 @@ const activeClickButton = () => {
         case CONST.SHIFT:
           activeShiftButton(keysContent);
           break;
-        case CONST.ENTER:
-          textarea.value += '\n';
-          break;
-        case CONST.BACKSPACE:
-          textarea.value = textarea.value.slice(0, -1);
-          break;
         case CONST.CTRL:
           break;
         case CONST.ALT:
+          break;
+        case CONST.WIN:
           break;
         default:
           textarea.value += e.target.innerText;
@@ -83,8 +112,11 @@ const removeActiveClass = () => {
   });
 };
 
-// const setPositionCursor = () => {
-//   textarea.selectionStart -= 1;
-// };
+const setPositionCursor = (textarea, position) => {
+  const tx = textarea;
+  tx.focus();
+  tx.selectionStart = position;
+  tx.selectionEnd = position;
+};
 
 export default activeButtons;
