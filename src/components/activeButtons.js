@@ -1,43 +1,38 @@
 import buttons from '../data/buttons.js';
 
 const activeButtons = () => {
-  activeClickButton();
+  const textarea = document.querySelector('.keyboard__textarea');
+  activeClickButton(textarea);
   addActiveClassOnPressKey();
-  removeActiveClass();
+  removeActiveClass(textarea);
 };
 
-const activeClickButton = () => {
+const activeClickButton = (textarea) => {
+  const tx = textarea;
   document.querySelector('.keyboard').addEventListener('click', (e) => {
-    for (let i = 0; i < buttons.length; i++) {
-      if (e.target.classList.contains('keyboard__key')) {
-        document.querySelector('.keyboard__textarea').focus();
-      }
+    if (e.target.classList.contains('keyboard__key')) {
+      tx.focus();
+      tx.value += e.target.innerText;
     }
   });
 };
 
 const addActiveClassOnPressKey = () => {
   document.addEventListener('keydown', (e) => {
-    iterationButtons(e, 'add', 'keyboard__key-active');
+    e.preventDefault();
+    const button = buttons.find((item) => item.code === e.code);
+    button.lineItem.classList.add('keyboard__key-active');
+    button.lineItem.click();
   });
 };
 
-const removeActiveClass = () => {
+const removeActiveClass = (textarea) => {
+  const tx = textarea;
   document.addEventListener('keyup', (e) => {
-    iterationButtons(e, 'remove', 'keyboard__key-active');
+    const button = buttons.find((item) => item.code === e.code);
+    button.lineItem.classList.remove('keyboard__key-active');
+    tx.focus();
   });
-};
-
-const iterationButtons = (e, action, className) => {
-  for (let i = 0; i < buttons.length; i++) {
-    if (e.code === buttons[i].code) {
-      if (action === 'add') {
-        buttons[i].lineItem.classList.add(`${className}`);
-      } else if (action === 'remove') {
-        buttons[i].lineItem.classList.remove(`${className}`);
-      }
-    }
-  }
 };
 
 export default activeButtons;
