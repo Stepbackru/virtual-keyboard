@@ -15,6 +15,7 @@ const initKeyBoard = () => {
 
   textareaCreator();
   linesCreator();
+  infoCreator();
 };
 
 const textareaCreator = () => {
@@ -46,6 +47,16 @@ const linesCreator = () => {
       }
     }
   }
+};
+
+const infoCreator = () => {
+  const lang = sessionStorage.getItem('lang');
+  const infoLang = document.createElement('p');
+  const infoOS = document.createElement('p');
+  infoLang.innerText = `${(lang === 'ru') ? 'Смена языка ввода Ctrl + Shift' : 'Change input language Ctrl + Shift'}`;
+  infoOS.innerText = `${(lang === 'ru') ? 'Сделано в ОС Windows' : 'Developed in Windows OS'}`;
+  document.querySelector('.keyboard').append(infoLang);
+  document.querySelector('.keyboard').append(infoOS);
 };
 
 export default init;
