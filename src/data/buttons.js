@@ -1,7 +1,7 @@
 const buttons = [
   {
     type: 'other',
-    content: { ru: '`', en: 'ё' },
+    content: { ru: 'ё', en: '`' },
     altContent: { ru: 'ё', en: '~' },
     code: 'Backquote',
     width: 'normal',

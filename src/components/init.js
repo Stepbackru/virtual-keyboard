@@ -36,7 +36,13 @@ const linesCreator = () => {
         const lineItem = document.createElement('button');
         lineItem.classList.add('keyboard__key');
         lineItem.classList.add(`keyboard__key-${buttons[j].width}`);
-        lineItem.innerHTML = `<span class="key__content">${buttons[j].content.ru}</span>`;
+        if (sessionStorage.getItem('lang') === 'ru') {
+          lineItem.innerHTML = `<span class="key__content">${buttons[j].content.ru}</span>`;
+        } else if (sessionStorage.getItem('lang') === 'en') {
+          lineItem.innerHTML = `<span class="key__content">${buttons[j].content.en}</span>`;
+        } else {
+          lineItem.innerHTML = `<span class="key__content">${buttons[j].content.ru}</span>`;
+        }
         keyboardLines.append(lineItem);
         buttons[j].lineItem = lineItem;
       }

@@ -57,6 +57,7 @@ body {
 .key__content {
     color: #fff;
     text-align: center;
+    font-size: 16px;
 }
 .keyboard__key-active,
 .keyboard__key:active {
