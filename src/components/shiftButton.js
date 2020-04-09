@@ -1,38 +1,28 @@
 import buttons from '../data/buttons.js';
 import * as CONST from '../constants.js';
 
-export const activeShiftButton = (itemsArr, capsPress) => {
+export const activeShiftButton = (itemsArr) => {
   const items = itemsArr;
   document.addEventListener('keydown', (e) => {
-    if ((e.code === CONST.SHIFT_LEFT_CODE || e.code === CONST.SHIFT_RIGHT_CODE) && (sessionStorage.getItem('lang') === 'ru')) {
+    if ((e.code === CONST.SHIFT_LEFT_CODE || e.code === CONST.SHIFT_RIGHT_CODE)) {
       for (let i = 0; i < items.length; i++) {
         if (buttons[i].type !== 'functional') {
-          items[i].innerHTML = `<span class="key__content">${capsPress ? buttons[i].altContent.ru.toUpperCase() : buttons[i].altContent.ru}</span>`;
-        }
-      }
-    } else if ((e.code === CONST.SHIFT_LEFT_CODE || e.code === CONST.SHIFT_RIGHT_CODE) && (sessionStorage.getItem('lang') === 'en')) {
-      for (let i = 0; i < items.length; i++) {
-        if (buttons[i].type !== 'functional') {
-          items[i].innerHTML = `<span class="key__content">${capsPress ? buttons[i].altContent.en.toUpperCase() : buttons[i].altContent.en}</span>`;
+          items[i].innerText = `${(sessionStorage.getItem('lang') === 'ru') ? buttons[i].altContent.ru : buttons[i].altContent.en}`;
+          items[i].classList.add('key__content-shift');
         }
       }
     }
   });
 };
 
-export const disableShiftButton = (itemsArr, capsPress) => {
+export const disableShiftButton = (itemsArr) => {
   const items = itemsArr;
   document.addEventListener('keyup', (e) => {
-    if ((e.code === CONST.SHIFT_LEFT_CODE || e.code === CONST.SHIFT_RIGHT_CODE) && (sessionStorage.getItem('lang') === 'ru')) {
+    if ((e.code === CONST.SHIFT_LEFT_CODE || e.code === CONST.SHIFT_RIGHT_CODE)) {
       for (let i = 0; i < items.length; i++) {
         if (buttons[i].type !== 'functional') {
-          items[i].innerHTML = `<span class="key__content">${capsPress ? buttons[i].content.ru.toUpperCase() : buttons[i].content.ru}</span>`;
-        }
-      }
-    } else if ((e.code === CONST.SHIFT_LEFT_CODE || e.code === CONST.SHIFT_RIGHT_CODE) && (sessionStorage.getItem('lang') === 'en')) {
-      for (let i = 0; i < items.length; i++) {
-        if (buttons[i].type !== 'functional') {
-          items[i].innerHTML = `<span class="key__content">${capsPress ? buttons[i].content.en.toUpperCase() : buttons[i].content.en}</span>`;
+          items[i].innerText = `${(sessionStorage.getItem('lang') === 'ru') ? buttons[i].content.ru : buttons[i].content.en}`;
+          items[i].classList.remove('key__content-shift');
         }
       }
     }

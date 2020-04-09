@@ -11,7 +11,7 @@ const activeButtons = () => {
 
 const activeClickButton = () => {
   const textarea = document.querySelector('.keyboard__textarea');
-  const keyItems = [...document.querySelectorAll('.keyboard__key')];
+  const keysContent = [...document.querySelectorAll('.key__content')];
   let capsPress = false;
 
   document.querySelector('.keyboard').addEventListener('click', (e) => {
@@ -22,11 +22,11 @@ const activeClickButton = () => {
           break;
         case CONST.CAPSLOCK:
           capsPress = !capsPress;
-          capslockHandler(keyItems, capsPress);
+          capslockHandler(keysContent, capsPress);
           break;
         case CONST.SHIFT:
-          SHIFT.activeShiftButton(keyItems, capsPress);
-          SHIFT.disableShiftButton(keyItems, capsPress);
+          SHIFT.activeShiftButton(keysContent);
+          SHIFT.disableShiftButton(keysContent);
           break;
         case CONST.ENTER:
           textarea.value += '\n';
