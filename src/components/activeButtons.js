@@ -1,18 +1,43 @@
 import buttons from '../data/buttons.js';
+import * as CONST from '../constants.js';
+import * as SHIFT from './shiftButton.js';
 
 const activeButtons = () => {
-  const textarea = document.querySelector('.keyboard__textarea');
-  activeClickButton(textarea);
+  activeClickButton();
   addActiveClassOnPressKey();
-  removeActiveClass(textarea);
+  removeActiveClass();
 };
 
-const activeClickButton = (textarea) => {
-  const tx = textarea;
+const activeClickButton = () => {
+  const textarea = document.querySelector('.keyboard__textarea');
+  const keysContent = [...document.querySelectorAll('.key__content')];
+
   document.querySelector('.keyboard').addEventListener('click', (e) => {
     if (e.target.classList.contains('keyboard__key')) {
-      tx.focus();
-      tx.value += e.target.innerText;
+      switch (e.target.innerText) {
+        case CONST.TAB:
+          textarea.value += '\t';
+          break;
+        case CONST.CAPSLOCK:
+          break;
+        case CONST.SHIFT:
+          SHIFT.activeShiftButton(keysContent);
+          SHIFT.disableShiftButton(keysContent);
+          break;
+        case CONST.ENTER:
+          textarea.value += '\n';
+          break;
+        case CONST.BACKSPACE:
+          textarea.value = textarea.value.slice(0, -1);
+          break;
+        case CONST.CTRL:
+          break;
+        case CONST.ALT:
+          break;
+        default:
+          textarea.value += e.target.innerText;
+      }
+      textarea.focus();
     }
   });
 };
@@ -26,13 +51,15 @@ const addActiveClassOnPressKey = () => {
   });
 };
 
-const removeActiveClass = (textarea) => {
-  const tx = textarea;
+const removeActiveClass = () => {
   document.addEventListener('keyup', (e) => {
     const button = buttons.find((item) => item.code === e.code);
     button.lineItem.classList.remove('keyboard__key-active');
-    tx.focus();
   });
 };
+
+// const setPositionCursor = () => {
+//   textarea.selectionStart -= 1;
+// };
 
 export default activeButtons;

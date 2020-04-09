@@ -1,3 +1,10 @@
 export const SHIFT_LEFT_CODE = 'ShiftLeft';
 export const SHIFT_RIGHT_CODE = 'ShiftRight';
 export const CAPSLOCK_CODE = 'CapsLock';
+export const TAB = 'Tab';
+export const CAPSLOCK = 'Caps Lock';
+export const SHIFT = 'Shift';
+export const CTRL = 'Ctrl';
+export const ALT = 'Alt';
+export const ENTER = 'ENTER';
+export const BACKSPACE = 'Backspace';

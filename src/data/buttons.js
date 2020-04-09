@@ -465,8 +465,8 @@ const buttons = [
   },
   {
     type: 'functional',
-    content: { ru: ' ', en: ' ' },
-    altContent: { ru: ' ', en: ' ' },
+    content: { ru: '&nbsp;', en: '&nbsp;' },
+    altContent: { ru: '&nbsp;', en: '&nbsp;' },
     code: 'Space',
     width: 'overwide',
     row: 5,
