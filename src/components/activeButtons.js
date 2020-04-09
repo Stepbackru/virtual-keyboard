@@ -22,11 +22,11 @@ const activeClickButton = () => {
           break;
         case CONST.CAPSLOCK:
           capsPress = !capsPress;
-          capslockHandler(keysContent, capsPress);
+          capslockHandler(e, keysContent, capsPress);
           break;
         case CONST.SHIFT:
-          SHIFT.activeShiftButton(keysContent);
-          SHIFT.disableShiftButton(keysContent);
+          SHIFT.activeShiftButton(e, keysContent);
+          SHIFT.disableShiftButton(e, keysContent);
           break;
         case CONST.ENTER:
           textarea.value += '\n';
@@ -48,17 +48,21 @@ const activeClickButton = () => {
 
 const addActiveClassOnPressKey = () => {
   document.addEventListener('keydown', (e) => {
-    e.preventDefault();
     const button = buttons.find((item) => item.code === e.code);
-    button.lineItem.classList.add('keyboard__key-active');
-    button.lineItem.click();
+    if (button) {
+      e.preventDefault();
+      button.lineItem.classList.add('keyboard__key-active');
+      button.lineItem.click();
+    }
   });
 };
 
 const removeActiveClass = () => {
   document.addEventListener('keyup', (e) => {
     const button = buttons.find((item) => item.code === e.code);
-    button.lineItem.classList.remove('keyboard__key-active');
+    if (button) {
+      button.lineItem.classList.remove('keyboard__key-active');
+    }
   });
 };
 
