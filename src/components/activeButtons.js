@@ -1,6 +1,6 @@
 import buttons from '../data/buttons.js';
 import * as CONST from '../constants.js';
-import * as SHIFT from './shiftButton.js';
+import activeShiftButton from './shiftButton.js';
 import capslockHandler from './capslockButton.js';
 
 const activeButtons = () => {
@@ -22,11 +22,10 @@ const activeClickButton = () => {
           break;
         case CONST.CAPSLOCK:
           capsPress = !capsPress;
-          capslockHandler(e, keysContent, capsPress);
+          capslockHandler(keysContent, capsPress);
           break;
         case CONST.SHIFT:
-          SHIFT.activeShiftButton(e, keysContent);
-          SHIFT.disableShiftButton(e, keysContent);
+          activeShiftButton(keysContent);
           break;
         case CONST.ENTER:
           textarea.value += '\n';
@@ -51,15 +50,25 @@ const addActiveClassOnPressKey = () => {
     const button = buttons.find((item) => item.code === e.code);
     if (button) {
       e.preventDefault();
+      if ((e.code === CONST.SHIFT_LEFT_CODE || e.code === CONST.SHIFT_RIGHT_CODE) && (e.repeat)) {
+        return null;
+      }
+      if ((e.code === CONST.CAPSLOCK_CODE) && (e.repeat)) {
+        return null;
+      }
       button.lineItem.classList.add('keyboard__key-active');
       button.lineItem.click();
     }
+    return null;
   });
 };
 
 const removeActiveClass = () => {
   document.addEventListener('keyup', (e) => {
     const button = buttons.find((item) => item.code === e.code);
+    if (e.code === CONST.SHIFT_LEFT_CODE || e.code === CONST.SHIFT_RIGHT_CODE) {
+      button.lineItem.click();
+    }
     if (button) {
       button.lineItem.classList.remove('keyboard__key-active');
     }
