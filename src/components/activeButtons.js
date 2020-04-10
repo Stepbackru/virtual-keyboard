@@ -15,7 +15,7 @@ const activeClickButton = () => {
   let capsPress = false;
 
   document.querySelector('.keyboard').addEventListener('click', (e) => {
-    if (e.target.classList.contains('keyboard__key')) {
+    if ((e.target.classList.contains('keyboard__key')) || (e.target.classList.contains('key__content'))) {
       switch (e.target.innerText) {
         case CONST.TAB:
           textarea.value = `${textarea.value.substring(0, textarea.selectionStart)}\t${textarea.value.substring(textarea.selectionEnd)}`;
