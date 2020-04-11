@@ -12,47 +12,47 @@ const activeButtons = () => {
 const activeClickButton = () => {
   const textarea = document.querySelector('.keyboard__textarea');
   const keysContent = [...document.querySelectorAll('.key__content')];
-  const { value, selectionStart, selectionEnd } = textarea;
+  // const { value } = textarea;
   let capsPress = false;
 
   document.querySelector('.keyboard').addEventListener('click', (e) => {
     if ((e.target.classList.contains('keyboard__key')) || (e.target.classList.contains('key__content'))) {
       switch (e.target.innerText) {
         case CONST.TAB:
-          textarea.value = `${value.substring(0, selectionStart)}\t${value.substring(selectionEnd)}`;
-          setPositionCursor(textarea, selectionStart + 1);
+          textarea.value = `${textarea.value.substring(0, textarea.selectionStart)}\t${textarea.value.substring(textarea.selectionEnd)}`;
+          setPositionCursor(textarea, textarea.selectionStart + 1);
           break;
         case CONST.ENTER:
-          textarea.value = `${value.substring(0, selectionStart)}\n${value.substring(selectionEnd)}`;
-          setPositionCursor(textarea, selectionStart + 1);
+          textarea.value = `${textarea.value.substring(0, textarea.selectionStart)}\n${textarea.value.substring(textarea.selectionEnd)}`;
+          setPositionCursor(textarea, textarea.selectionStart + 1);
           break;
         case CONST.BACKSPACE:
-          if (selectionStart !== selectionEnd) {
-            textarea.value = `${value.slice(0, selectionStart)}${value.slice(selectionEnd)}`;
-            setPositionCursor(textarea, selectionStart);
-          } else if (selectionStart !== 0) {
-            textarea.value = `${value.slice(0, selectionStart - 1)}${value.slice(selectionEnd)}`;
-            setPositionCursor(textarea, selectionEnd);
+          if (textarea.selectionStart !== textarea.selectionEnd) {
+            textarea.value = `${textarea.value.slice(0, textarea.selectionStart)}${textarea.value.slice(textarea.selectionEnd)}`;
+            setPositionCursor(textarea, textarea.selectionStart);
+          } else if (textarea.selectionStart !== 0) {
+            textarea.value = `${textarea.value.slice(0, textarea.selectionStart - 1)}${textarea.value.slice(textarea.selectionEnd)}`;
+            setPositionCursor(textarea, textarea.selectionEnd);
           } else {
-            setPositionCursor(textarea, selectionEnd);
+            setPositionCursor(textarea, textarea.selectionEnd);
           }
           break;
         case CONST.DEL:
-          if (selectionStart !== selectionEnd) {
-            textarea.value = `${value.slice(0, selectionStart)}${value.slice(selectionEnd)}`;
-          } else if (selectionEnd !== value.length) {
-            textarea.value = `${value.slice(0, selectionStart)}${value.slice(selectionStart + 1)}`;
+          if (textarea.selectionStart !== textarea.selectionEnd) {
+            textarea.value = `${textarea.value.slice(0, textarea.selectionStart)}${textarea.value.slice(textarea.selectionEnd)}`;
+          } else if (textarea.selectionEnd !== textarea.value.length) {
+            textarea.value = `${textarea.value.slice(0, textarea.selectionStart)}${textarea.value.slice(textarea.selectionStart + 1)}`;
           }
-          setPositionCursor(textarea, selectionStart);
+          setPositionCursor(textarea, textarea.selectionStart);
           break;
         case CONST.ARROWLEFT:
-          setPositionCursor(textarea, selectionStart - 1);
+          setPositionCursor(textarea, textarea.selectionStart - 1);
           break;
         case CONST.ARROWDOWN:
-          setPositionCursor(textarea, value.length);
+          setPositionCursor(textarea, textarea.value.length);
           break;
         case CONST.ARROWRIGHT:
-          setPositionCursor(textarea, selectionStart + 1);
+          setPositionCursor(textarea, textarea.selectionStart + 1);
           break;
         case CONST.ARROWUP:
           setPositionCursor(textarea, 0);
