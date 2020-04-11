@@ -26,26 +26,29 @@ const textareaCreator = () => {
 };
 
 const linesCreator = () => {
-  if (sessionStorage.getItem('lang') === null) {
+  if (!sessionStorage.getItem('lang')) {
     sessionStorage.setItem('lang', 'ru');
   }
   const lang = sessionStorage.getItem('lang');
-  for (let i = 1; i <= 5; i++) {
+  const KEYBOARD_LINES = 5;
+  const lines = [];
+
+  for (let i = 1; i <= KEYBOARD_LINES; i++) {
     const keyboardLines = document.createElement('div');
     keyboardLines.classList.add('keyboard__line');
     keyboardLines.setAttribute('data-line', `${i}`);
-    document.querySelector('.keyboard').append(keyboardLines);
-
-    for (let j = 0; j < buttons.length; j++) {
-      if (i === buttons[j].row) {
-        const lineItem = document.createElement('button');
-        lineItem.classList.add('keyboard__key');
-        lineItem.classList.add(`keyboard__key-${buttons[j].width}`);
-        lineItem.innerHTML = `<span class="key__content">${buttons[j].content[lang]}</span>`;
-        keyboardLines.append(lineItem);
-        buttons[j].lineItem = lineItem;
-      }
-    }
+    lines.push(keyboardLines);
+  }
+  for (let i = 0; i < buttons.length; i++) {
+    const lineItem = document.createElement('button');
+    lineItem.classList.add('keyboard__key');
+    lineItem.classList.add(`keyboard__key-${buttons[i].width}`);
+    lineItem.innerHTML = `<span class="key__content">${buttons[i].content[lang]}</span>`;
+    buttons[i].lineItem = lineItem;
+    lines[buttons[i].row - 1].append(buttons[i].lineItem);
+  }
+  for (let i = 0; i < lines.length; i++) {
+    document.querySelector('.keyboard').append(lines[i]);
   }
 };
 
