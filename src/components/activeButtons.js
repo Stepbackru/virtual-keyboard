@@ -84,15 +84,14 @@ const addActiveClassOnPressKey = () => {
     if (button) {
       e.preventDefault();
       if ((e.code === CONST.SHIFT_LEFT_CODE || e.code === CONST.SHIFT_RIGHT_CODE) && (e.repeat)) {
-        return null;
+        return;
       }
       if ((e.code === CONST.CAPSLOCK_CODE) && (e.repeat)) {
-        return null;
+        return;
       }
       button.lineItem.classList.add('keyboard__key-active');
       button.lineItem.click();
     }
-    return null;
   });
 };
 
